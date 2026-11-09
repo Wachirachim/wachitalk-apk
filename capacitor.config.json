@@ -1,0 +1,14 @@
+{
+  "appId": "app.wachitalk.chat",
+  "appName": "WachiTalk",
+  "webDir": "www",
+  "server": {
+    "url": "https://wachitalk.pages.dev",
+    "androidScheme": "https",
+    "allowNavigation": ["wachitalk.pages.dev", "*.firebaseapp.com", "*.firebaseio.com", "*.googleapis.com", "*.google.com", "*.youtube.com", "*.ytimg.com"]
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#1a120c"
+  }
+}
