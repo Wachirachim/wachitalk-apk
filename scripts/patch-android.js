@@ -1,3 +1,15 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WachiTalk</title>
-<style>body{margin:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#1a120c;color:#f1e4d6;font-family:sans-serif;text-align:center}button{padding:12px 22px;border-radius:22px;border:0;background:#c98b5a;color:#1a120c;font-size:16px}</style></head>
-<body><b>WachiTalk</b><div>เปิดไม่ขึ้น — เช็กเน็ตแล้วลองใหม่</div><button onclick="location.href='https://wachitalk.pages.dev'">ลองใหม่</button></body></html>
+const fs = require('fs');
+const run = process.env.GITHUB_RUN_NUMBER || '1';
+const ver = require('../package.json').version;
+const mf = 'android/app/src/main/AndroidManifest.xml';
+let m = fs.readFileSync(mf, 'utf8');
+const perms = ['CAMERA','RECORD_AUDIO','MODIFY_AUDIO_SETTINGS','ACCESS_FINE_LOCATION','ACCESS_COARSE_LOCATION','WAKE_LOCK','VIBRATE','BLUETOOTH_CONNECT'];
+let add = perms.filter(p => !m.includes('android.permission.' + p)).map(p => `    <uses-permission android:name="android.permission.${p}" />`).join('\n');
+add += '\n    <uses-feature android:name="android.hardware.camera" android:required="false" />\n    <uses-feature android:name="android.hardware.location.gps" android:required="false" />';
+m = m.replace('</manifest>', add + '\n</manifest>');
+fs.writeFileSync(mf, m);
+const gf = 'android/app/build.gradle';
+let g = fs.readFileSync(gf, 'utf8');
+g = g.replace(/versionCode\s+\d+/, 'versionCode ' + run).replace(/versionName\s+"[^"]*"/, `versionName "${ver}-b${run}"`);
+fs.writeFileSync(gf, g);
+console.log('patched', ver, run);
