@@ -1,0 +1,3 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WachiTalk</title>
+<style>body{margin:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#1a120c;color:#f1e4d6;font-family:sans-serif;text-align:center}button{padding:12px 22px;border-radius:22px;border:0;background:#c98b5a;color:#1a120c;font-size:16px}</style></head>
+<body><b>WachiTalk</b><div>เปิดไม่ขึ้น — เช็กเน็ตแล้วลองใหม่</div><button onclick="location.href='https://wachitalk.pages.dev'">ลองใหม่</button></body></html>
